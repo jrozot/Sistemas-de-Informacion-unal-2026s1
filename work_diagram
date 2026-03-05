@@ -86,12 +86,14 @@ state Hito_1{
     cporter --> eporter
     eporter --> scorecards
     scorecards -[dashed]> indicators
-}
 
 state "Marco de decisión (TOGAF)" as togaf {
-    state "Arquitectura" as architecture
+    state "Arquitectura TOGAF" as architecture
     state "Mapa de capacidades" as capmap <<green>>
 }
+
+}
+
 
 state "Requerimientos" as req{
     state "Historias de usuario" as usrhist
@@ -103,6 +105,10 @@ state "Ing. de procesos BPMN 2.0" as bpmn{
     state "Diagrama de proceso SI to-be" as tobe
 }
 
+state "Product discovery" as proddisc {
+    state "Oportunity Solution Tree" as ost
+    state "Journey Map" as journey
+}
 state "Backlog en Jira" as jira <<red>>
 
 
@@ -113,16 +119,20 @@ architecture -[dashed]> scorecards
 
 cporter -[dashed]> asis
 
-scorecards --> usrhist
+scorecards --> req
+bpmn --> architecture
+proddisc --> usrhist
+
 usrhist -[dashed]> rnf
 eporter -[dashed]> tobe
 usrhist --> jira
 }
 
 state Hito_2{
-state "Desarrollo kanban" as dev
+state "Desarrollo con Kanban" as dev
 }
 Inicio --> fporter
 Inicio --> cporter
+Inicio --> proddisc
 jira --> dev
 @enduml

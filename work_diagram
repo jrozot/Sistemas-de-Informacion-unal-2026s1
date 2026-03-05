@@ -87,7 +87,7 @@ state Hito_1{
     eporter --> scorecards
     scorecards -[dashed]> indicators
 
-state "Marco de decisión (TOGAF)" as togaf {
+state "Marco de decisión" as togaf {
     state "Arquitectura TOGAF" as architecture
     state "Mapa de capacidades" as capmap <<green>>
 }
@@ -98,6 +98,10 @@ state "Marco de decisión (TOGAF)" as togaf {
 state "Requerimientos" as req{
     state "Historias de usuario" as usrhist
     state "Matriz RNF" as rnf
+    state "Feedback" as feedhs <<green>>
+
+    feedhs -[dashed]> usrhist
+    usrhist -[dashed]> feedhs
 }
 
 state "Ing. de procesos BPMN 2.0" as bpmn{
@@ -109,7 +113,7 @@ state "Product discovery" as proddisc {
     state "Oportunity Solution Tree" as ost
     state "Journey Map" as journey
 }
-state "Backlog en Jira" as jira <<red>>
+state "Backlog y setup en Jira" as jira <<red>>
 
 
 bpmn -[hidden]right> sam

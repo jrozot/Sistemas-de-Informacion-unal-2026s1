@@ -1,0 +1,128 @@
+@startuml
+!theme mars
+
+<style>
+/* Blue state */
+.blue { 
+  BackgroundColor #D6E8FF 
+  LineColor #3A7BD5 
+  FontColor #243957
+}
+
+/* Green state */
+.green { 
+  BackgroundColor #DFF5E1 
+  LineColor #3CB371 
+  FontColor #2F4F2F 
+}
+
+/* Yellow state */
+.yellow { 
+  BackgroundColor #FFF4CC 
+  LineColor #E6B800 
+  FontColor #6E4B00 
+}
+
+/* Orange state */
+.orange { 
+  BackgroundColor #FFE2CC 
+  LineColor #FF8C42 
+  FontColor #A0522D 
+}
+
+/* Red state */
+.red { 
+  BackgroundColor #FFD6D6 
+  LineColor #E55353 
+  FontColor #800000 
+}
+
+/* Purple state */
+.purple { 
+  BackgroundColor #E6DBFF 
+  LineColor #7B61FF 
+  FontColor #4B0082 
+}
+
+/* Teal state */
+.teal { 
+  BackgroundColor #D6F5F3 
+  LineColor #1CA7A6 
+  FontColor #1F4D4F 
+}
+
+/* Gray state */
+.gray { 
+  BackgroundColor #ECECEC 
+  LineColor #888888 
+  FontColor #2F4F4F 
+}
+</style>
+
+hide empty description
+left to right direction
+
+state "Leyenda" as ley{
+state "Juan Rozo" <<red>>
+state "Luis Ferney" <<green>>
+state "Juan Pablo" <<blue>>
+state "Miguel Angel" <<orange>>
+state "Mateo Aguirre" <<purple>>
+state "Omar Alejandro" <<teal>>
+}
+
+state "Inicio" as Inicio
+[*] --> Inicio
+
+state Hito_1{
+    state "Alineación Estratégica (SAM)" as sam{
+    state "Fuerzas de Porter" as fporter <<red>>
+    state "Cadena de Porter" as cporter <<green>>
+    state "Estratégia de porter" as eporter <<red>>
+    state "Scorecards" as scorecards <<red>>
+    state "KPI/KRI/KCI" as indicators
+
+    fporter --> eporter
+    cporter --> eporter
+    eporter --> scorecards
+    scorecards -[dashed]> indicators
+}
+
+state "Marco de decisión (TOGAF)" as togaf {
+    state "Arquitectura" as architecture
+    state "Mapa de capacidades" as capmap <<green>>
+}
+
+state "Requerimientos" as req{
+    state "Historias de usuario" as usrhist
+    state "Matriz RNF" as rnf
+}
+
+state "Ing. de procesos BPMN 2.0" as bpmn{
+    state "Mapa de calor as-is" as asis <<orange>>
+    state "Diagrama de proceso SI to-be" as tobe
+}
+
+state "Backlog en Jira" as jira <<red>>
+
+
+bpmn -[hidden]right> sam
+
+capmap -[dashed]> scorecards
+architecture -[dashed]> scorecards
+
+cporter -[dashed]> asis
+
+scorecards --> usrhist
+usrhist -[dashed]> rnf
+eporter -[dashed]> tobe
+usrhist --> jira
+}
+
+state Hito_2{
+state "Desarrollo kanban" as dev
+}
+Inicio --> fporter
+Inicio --> cporter
+jira --> dev
+@enduml

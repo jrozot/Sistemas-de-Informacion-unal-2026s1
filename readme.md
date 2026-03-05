@@ -1,6 +1,6 @@
 # Plan de trabajo para Hito1
 
-## Condiciones:
+![diagrama de trabajo.png](work_diagram.png)
 
 ### Fuerzas de Porter:
 
